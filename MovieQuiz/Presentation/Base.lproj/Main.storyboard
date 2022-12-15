@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_5" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -23,19 +23,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZpC-dS-Nka">
-                                <rect key="frame" x="20" y="54" width="374" height="785"/>
+                                <rect key="frame" x="20" y="58" width="374" height="785"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFH-Ri-Hew">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUi-mV-c3X" userLabel="Question Title Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="338.66666666666669" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="338.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1/10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydv-TP-nsJ" userLabel="Index Label">
-                                                <rect key="frame" x="338.66666666666669" y="0.0" width="35.333333333333314" height="24"/>
+                                                <rect key="frame" x="338.5" y="0.0" width="35.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
@@ -60,9 +60,10 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="O3e-nR-6DG" secondAttribute="trailing" constant="42" id="9Ij-hO-3dL"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="O3e-nR-6DG" secondAttribute="trailing" constant="42" id="9Ij-hO-3dL"/>
                                             <constraint firstItem="O3e-nR-6DG" firstAttribute="top" secondItem="k7y-AI-EdV" secondAttribute="top" constant="13" id="DoO-LS-Udv"/>
-                                            <constraint firstItem="O3e-nR-6DG" firstAttribute="leading" secondItem="k7y-AI-EdV" secondAttribute="leading" constant="42" id="OSW-Pp-EH8"/>
+                                            <constraint firstItem="O3e-nR-6DG" firstAttribute="leading" relation="lessThanOrEqual" secondItem="k7y-AI-EdV" secondAttribute="leading" constant="42" id="OSW-Pp-EH8"/>
+                                            <constraint firstItem="O3e-nR-6DG" firstAttribute="centerX" secondItem="k7y-AI-EdV" secondAttribute="centerX" id="WmL-mE-JHd"/>
                                             <constraint firstAttribute="bottom" secondItem="O3e-nR-6DG" secondAttribute="bottom" constant="13" id="aOV-mQ-vqj"/>
                                         </constraints>
                                     </view>
