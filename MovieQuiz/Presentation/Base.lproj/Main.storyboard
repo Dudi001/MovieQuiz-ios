@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZpC-dS-Nka">
-                                <rect key="frame" x="20" y="58" width="374" height="784.5"/>
+                                <rect key="frame" x="20" y="58" width="374" height="785.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFH-Ri-Hew">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="23.5"/>
@@ -53,10 +53,10 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k7y-AI-EdV">
-                                        <rect key="frame" x="0.0" y="624.5" width="374" height="80"/>
+                                        <rect key="frame" x="0.0" y="624.5" width="374" height="81"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3e-nR-6DG" userLabel="Question Label">
-                                                <rect key="frame" x="42" y="13" width="290" height="54"/>
+                                                <rect key="frame" x="42" y="13" width="290" height="55"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                                 <color key="textColor" name="YPWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Tnc-X1-N8P">
-                                        <rect key="frame" x="0.0" y="724.5" width="374" height="60"/>
+                                        <rect key="frame" x="0.0" y="725.5" width="374" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwW-CZ-KZO" userLabel="NoButton">
                                                 <rect key="frame" x="0.0" y="0.0" width="177" height="60"/>
@@ -129,7 +129,9 @@
                     <connections>
                         <outlet property="counterLabel" destination="Ydv-TP-nsJ" id="rR8-rO-qWU"/>
                         <outlet property="imageView" destination="GxV-XM-lxK" id="Qb1-S4-OR2"/>
+                        <outlet property="noButton" destination="vwW-CZ-KZO" id="1K5-q9-X6o"/>
                         <outlet property="textLabel" destination="O3e-nR-6DG" id="WdO-9X-922"/>
+                        <outlet property="yesButton" destination="I2E-cv-fo1" id="fqd-OJ-sp4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

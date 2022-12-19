@@ -10,6 +10,10 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet weak private var textLabel: UILabel!
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
+    
+    @IBOutlet weak var yesButton: UIButton!
+    @IBOutlet weak var noButton: UIButton!
+    
     private struct QuizQuestion {
         let image: String
         let text: String
@@ -92,6 +96,8 @@ final class MovieQuizViewController: UIViewController {
         counterLabel.text = step.questionNumber
         textLabel.text = step.question
         imageView.image = step.image
+        self.yesButton.isEnabled = true
+        self.noButton.isEnabled = true
         
     }
     
@@ -99,17 +105,23 @@ final class MovieQuizViewController: UIViewController {
         if isCorrect{
             correctAnswers += 1
             
+            self.yesButton.isEnabled = false
+            self.noButton.isEnabled = false
+            
             imageView.layer.masksToBounds = true
             imageView.layer.borderWidth = 8
-            imageView.layer.cornerRadius = 15
+            imageView.layer.cornerRadius = 20
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPGreen")?.cgColor : UIColor(named: "YPGreen")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.showNextQuestionOrResults()
                 }
         }else{
+            self.yesButton.isEnabled = false
+            self.noButton.isEnabled = false
+            
             imageView.layer.masksToBounds = true
             imageView.layer.borderWidth = 8
-            imageView.layer.cornerRadius = 15
+            imageView.layer.cornerRadius = 20
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPRed")?.cgColor : UIColor(named: "YPRed")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.showNextQuestionOrResults()
@@ -178,18 +190,6 @@ final class MovieQuizViewController: UIViewController {
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
