@@ -3,30 +3,30 @@ import UIKit
 final class MovieQuizViewController: UIViewController {
     // MARK: - Lifecycle
     
-
-
+    
+    
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var counterLabel: UILabel!
     @IBOutlet weak private var textLabel: UILabel!
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
     
-    @IBOutlet weak var yesButton: UIButton!
-    @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak private var yesButton: UIButton!
+    @IBOutlet weak private var noButton: UIButton!
     
     private struct QuizQuestion {
         let image: String
         let text: String
         let correctAnswer: Bool
     }
-
-    private struct QuizStepViewModel{
+    
+    private struct QuizStepViewModel {
         let image: UIImage
         let question: String
         let questionNumber: String
     }
-
-    private struct QuizResultsViewModel{
+    
+    private struct QuizResultsViewModel {
         let title: String
         let text: String
         let buttonText: String
@@ -74,7 +74,7 @@ final class MovieQuizViewController: UIViewController {
             image: "Vivarium",
             text: "Рейтинг этого фильма больше чем 6?",
             correctAnswer: false),
-
+        
     ]
     
     override func viewDidLoad() {
@@ -84,38 +84,38 @@ final class MovieQuizViewController: UIViewController {
         show(quiz: convert(model: currentQuestion))
         
     }
-
-    private func convert(model: QuizQuestion) -> QuizStepViewModel{
+    
+    private func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(
             image: UIImage(named: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questions.count)")
     }
-
-    private func show(quiz step: QuizStepViewModel){
+    
+    private func show(quiz step: QuizStepViewModel) {
         counterLabel.text = step.questionNumber
         textLabel.text = step.question
         imageView.image = step.image
-        self.yesButton.isEnabled = true
-        self.noButton.isEnabled = true
+        yesButton.isEnabled = true
+        noButton.isEnabled = true
         
     }
     
     private func showAnswerResult(isCorrect: Bool) {
-        if isCorrect{
+        if isCorrect {
             correctAnswers += 1
             
-            self.yesButton.isEnabled = false
-            self.noButton.isEnabled = false
+            yesButton.isEnabled = false
+            noButton.isEnabled = false
             
             imageView.layer.masksToBounds = true
             imageView.layer.borderWidth = 8
             imageView.layer.cornerRadius = 20
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPGreen")?.cgColor : UIColor(named: "YPGreen")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.showNextQuestionOrResults()
-                }
-        }else{
+                self.showNextQuestionOrResults()
+            }
+        } else {
             self.yesButton.isEnabled = false
             self.noButton.isEnabled = false
             
@@ -124,8 +124,8 @@ final class MovieQuizViewController: UIViewController {
             imageView.layer.cornerRadius = 20
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPRed")?.cgColor : UIColor(named: "YPRed")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.showNextQuestionOrResults()
-                }
+                self.showNextQuestionOrResults()
+            }
         }
         
         
@@ -133,7 +133,7 @@ final class MovieQuizViewController: UIViewController {
     
     
     private func showNextQuestionOrResults() {
-        if currentQuestionIndex == questions.count - 1{
+        if currentQuestionIndex == questions.count - 1 {
             let text = "Ваш результат: \(correctAnswers) из 10"
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
@@ -141,7 +141,7 @@ final class MovieQuizViewController: UIViewController {
                 buttonText: "Сыграть ещё раз")
             imageView.layer.borderWidth = 0
             show(quiz: viewModel)
-        }else{
+        } else {
             currentQuestionIndex += 1
             let nexQuestion = questions[currentQuestionIndex]
             let viewModel = convert(model: nexQuestion)
@@ -200,56 +200,56 @@ final class MovieQuizViewController: UIViewController {
  Настоящий рейтинг: 9,2
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: ДА
-
-
+ 
+ 
  Картинка: The Dark Knight
  Настоящий рейтинг: 9
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: ДА
-
-
+ 
+ 
  Картинка: Kill Bill
  Настоящий рейтинг: 8,1
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: ДА
-
-
+ 
+ 
  Картинка: The Avengers
  Настоящий рейтинг: 8
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: ДА
-
-
+ 
+ 
  Картинка: Deadpool
  Настоящий рейтинг: 8
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: ДА
-
-
+ 
+ 
  Картинка: The Green Knight
  Настоящий рейтинг: 6,6
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: ДА
-
-
+ 
+ 
  Картинка: Old
  Настоящий рейтинг: 5,8
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: НЕТ
-
-
+ 
+ 
  Картинка: The Ice Age Adventures of Buck Wild
  Настоящий рейтинг: 4,3
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: НЕТ
-
-
+ 
+ 
  Картинка: Tesla
  Настоящий рейтинг: 5,1
  Вопрос: Рейтинг этого фильма больше чем 6?
  Ответ: НЕТ
-
-
+ 
+ 
  Картинка: Vivarium
  Настоящий рейтинг: 5,8
  Вопрос: Рейтинг этого фильма больше чем 6?
