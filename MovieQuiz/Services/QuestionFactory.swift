@@ -14,7 +14,7 @@ class QuestionFactory: QuestionFactoryProtocol {
             return
         }
         
-        let question = questions[safe: index]
+        let question = questions[safe: index] //безопасное извлечение элемента из масива. Если выйдет за пределы то вернется nil
         delegate?.didReceiveNextQuestion(question: question)
     }
     

@@ -1,6 +1,6 @@
 import UIKit
 
-final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
+final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, AlertProtocolDelegate {
     
     // MARK: - Lifecycle
     
@@ -16,6 +16,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private let questionAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol? = nil
     private var currentQuestion: QuizQuestion?
+    private var alertPresenter: AlertPresenter?
     
     @IBOutlet weak private var yesButton: UIButton!
     @IBOutlet weak private var noButton: UIButton!
@@ -30,8 +31,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         imageView.layer.cornerRadius = 20
         
         questionFactory = QuestionFactory(delegate: self)
-        
         questionFactory?.requestNextQuestion()
+        alertPresenter = AlertPresenter(delegate: self)
     }
     
     //MARK: - QuestionFactoryDelegate
@@ -119,28 +120,26 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         }
     }
     
+    
+    //MARK: - Alert
     private func show(quiz result: QuizResultsViewModel) {
-        let alert = UIAlertController(
+        let alertModel = AlertModel(
             title: result.title,
             message: result.text,
-            preferredStyle: .alert)
+            buttonText: result.buttonText,
+            completion: {
+                [weak self] in
+                guard let self = self else { return }
+                self.currentQuestionIndex = 0
+                
+                // скидываем счётчик правильных ответов
+                self.correctAnswers = 0
+                
+                // заново показываем первый вопрос
+                self.questionFactory?.requestNextQuestion()
+        })
         
-        let action = UIAlertAction(title: result.buttonText, style: .default) {[weak self] _ in
-            guard let self = self else { return }
-            self.currentQuestionIndex = 0
-            
-            // скидываем счётчик правильных ответов
-            self.correctAnswers = 0
-            
-            // заново показываем первый вопрос
-            self.questionFactory?.requestNextQuestion()
-        }
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
+        alertPresenter?.showAlert(model: alertModel)
     }
     
     // MARK: - Actions
