@@ -137,7 +137,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                 
                 // заново показываем первый вопрос
                 self.questionFactory?.requestNextQuestion()
-        })
+            })
         
         alertPresenter?.showAlert(model: alertModel)
     }
