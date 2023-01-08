@@ -23,7 +23,8 @@ class AlertPresenter: AlertProtocol{
         
         let action = UIAlertAction(
             title: model.buttonText,
-            style: .default) {_ in
+            style: .default) {[weak self] _ in
+                guard self != nil else { return }
                 model.completion()
             }
         

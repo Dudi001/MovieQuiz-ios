@@ -17,6 +17,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private var questionFactory: QuestionFactoryProtocol? = nil
     private var currentQuestion: QuizQuestion?
     private var alertPresenter: AlertPresenter?
+    private var statisticService: StatisticService?
+    
     
     @IBOutlet weak private var yesButton: UIButton!
     @IBOutlet weak private var noButton: UIButton!
@@ -29,7 +31,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         super.viewDidLoad()
         
         imageView.layer.cornerRadius = 20
-        
+        statisticService = StatisticServiceImplementation()
         questionFactory = QuestionFactory(delegate: self)
         questionFactory?.requestNextQuestion()
         alertPresenter = AlertPresenter(delegate: self)
@@ -102,10 +104,25 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
     }
     
-    
+    //MARK: - Alert
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionAmount - 1 {
-            let text = "Ваш результат: \(correctAnswers) из 10"
+            
+            guard let statisticService = statisticService else { return }
+            //Сохраняем лучший результат
+            statisticService.store(correct: correctAnswers, total: questionAmount)
+            
+            let totalAccurancyPercentage = String(format: "%.2f", statisticService.totalAccuracy * 100) + "%"
+            
+            let localTime = statisticService.bestGame.date.dateTimeString
+            let bestGameStart = "\(statisticService.bestGame.correct) / \(statisticService.bestGame.total)"
+            
+            let text = """
+                    Ваш результат: \(correctAnswers) из \(questionAmount)
+                    Колличество сыграных квизов: \(statisticService.gamesCount)
+                    Рекорд: \(bestGameStart) (\(localTime))
+                    Средняя точность: \(totalAccurancyPercentage)
+        """
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
                 text: text,
@@ -121,7 +138,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     
-    //MARK: - Alert
+    
     private func show(quiz result: QuizResultsViewModel) {
         let alertModel = AlertModel(
             title: result.title,
