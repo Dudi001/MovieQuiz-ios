@@ -138,6 +138,8 @@
 		D9A41992296AD9C700417AC4 /* AlertProtocol */ = {
 			isa = PBXGroup;
 			children = (
+				D9A875012962E3CE004EF375 /* AlertProtocolDelegate.swift */,
+				D9A874FF29620F3B004EF375 /* AlertProtocol.swift */,
 			);
 			path = AlertProtocol;
 			sourceTree = "<group>";
@@ -155,6 +157,8 @@
 		D9A41994296ADADB00417AC4 /* StatisticService */ = {
 			isa = PBXGroup;
 			children = (
+				D9A41995296ADB1600417AC4 /* StatisticProtocol.swift */,
+				D927D387296724D000D9CFC8 /* StatisticService.swift */,
 			);
 			path = StatisticService;
 			sourceTree = "<group>";
@@ -188,10 +192,6 @@
 		D9D1D3B3295DFCE800A8F32B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D9A875012962E3CE004EF375 /* AlertProtocolDelegate.swift */,
-				D927D387296724D000D9CFC8 /* StatisticService.swift */,
-				D9A874FF29620F3B004EF375 /* AlertProtocol.swift */,
-				D9A41995296ADB1600417AC4 /* StatisticProtocol.swift */,
 				D9A41994296ADADB00417AC4 /* StatisticService */,
 				D9A41993296AD9E100417AC4 /* QuestionFactory */,
 				D9A41992296AD9C700417AC4 /* AlertProtocol */,
