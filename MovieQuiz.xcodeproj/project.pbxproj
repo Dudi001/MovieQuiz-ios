@@ -173,6 +173,7 @@
 		D9A41999296ADBB900417AC4 /* GameRecordModels */ = {
 			isa = PBXGroup;
 			children = (
+				D927D3892968447800D9CFC8 /* GameRecordModel.swift */,
 			);
 			path = GameRecordModels;
 			sourceTree = "<group>";
@@ -201,7 +202,6 @@
 				D9D1D3B9295E1DA500A8F32B /* QuizResultsViewModel.swift */,
 				D9D1D3BB295E1DB400A8F32B /* QuizQuestion.swift */,
 				D9A874F72961FF4E004EF375 /* AlertModel.swift */,
-				D927D3892968447800D9CFC8 /* GameRecordModel.swift */,
 				D9A41999296ADBB900417AC4 /* GameRecordModels */,
 				D9A41998296ADBA400417AC4 /* AlertModels */,
 				D9A41997296ADB8500417AC4 /* QuizModels */,
