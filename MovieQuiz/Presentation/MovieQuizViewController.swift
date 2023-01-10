@@ -118,10 +118,10 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             let bestGameStart = "\(statisticService.bestGame.correct) / \(statisticService.bestGame.total)"
             
             let text = """
-                    Ваш результат: \(correctAnswers) из \(questionAmount)
-                    Колличество сыграных квизов: \(statisticService.gamesCount)
-                    Рекорд: \(bestGameStart) (\(localTime))
-                    Средняя точность: \(totalAccurancyPercentage)
+            Ваш результат: \(correctAnswers) из \(questionAmount)
+            Колличество сыграных квизов: \(statisticService.gamesCount)
+            Рекорд: \(bestGameStart) (\(localTime))
+            Средняя точность: \(totalAccurancyPercentage)
         """
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
@@ -133,7 +133,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
             imageView.layer.borderWidth = 0
-            
         }
     }
     

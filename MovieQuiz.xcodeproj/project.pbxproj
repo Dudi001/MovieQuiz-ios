@@ -145,6 +145,9 @@
 		D9A41993296AD9E100417AC4 /* QuestionFactory */ = {
 			isa = PBXGroup;
 			children = (
+				D9A874F529608034004EF375 /* QuestionFactoryDelegate.swift */,
+				D9A874F3295F419A004EF375 /* QuestionFactoryProtocol.swift */,
+				D9D1D3B4295DFD6700A8F32B /* QuestionFactory.swift */,
 			);
 			path = QuestionFactory;
 			sourceTree = "<group>";
@@ -185,10 +188,7 @@
 		D9D1D3B3295DFCE800A8F32B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D9D1D3B4295DFD6700A8F32B /* QuestionFactory.swift */,
-				D9A874F3295F419A004EF375 /* QuestionFactoryProtocol.swift */,
 				D9A875012962E3CE004EF375 /* AlertProtocolDelegate.swift */,
-				D9A874F529608034004EF375 /* QuestionFactoryDelegate.swift */,
 				D927D387296724D000D9CFC8 /* StatisticService.swift */,
 				D9A874FF29620F3B004EF375 /* AlertProtocol.swift */,
 				D9A41995296ADB1600417AC4 /* StatisticProtocol.swift */,
