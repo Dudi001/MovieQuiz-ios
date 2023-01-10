@@ -10,5 +10,4 @@ import UIKit
 
 protocol AlertProtocol: AnyObject {
     func showAlert(model: AlertModel)
-
 }

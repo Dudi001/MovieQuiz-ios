@@ -11,7 +11,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     @IBOutlet weak private var textLabel: UILabel!
     
     private var correctAnswers: Int = 0
-    
     private var currentQuestionIndex: Int = 0
     private let questionAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol? = nil
@@ -67,7 +66,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         imageView.image = step.image
         yesButton.isEnabled = true
         noButton.isEnabled = true
-        
     }
     
     private func showAnswerResult(isCorrect: Bool) {
@@ -100,8 +98,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                 self.showNextQuestionOrResults()
             }
         }
-        
-        
     }
     
     //MARK: - Alert
