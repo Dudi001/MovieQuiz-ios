@@ -8,16 +8,6 @@
 import Foundation
 
 class QuestionFactory: QuestionFactoryProtocol {
-    func requestNextQuestion() {
-        guard let index = (0..<questions.count).randomElement() else {
-            delegate?.didReceiveNextQuestion(question: nil)
-            return
-        }
-        
-        let question = questions[safe: index] //безопасное извлечение элемента из масива. Если выйдет за пределы то вернется nil
-        delegate?.didReceiveNextQuestion(question: question)
-    }
-    
     
     private weak var delegate: QuestionFactoryDelegate?
     
@@ -70,5 +60,15 @@ class QuestionFactory: QuestionFactoryProtocol {
             correctAnswer: false),
         
     ]
+    
+    func requestNextQuestion() {
+        guard let index = (0..<questions.count).randomElement() else {
+            delegate?.didReceiveNextQuestion(question: nil)
+            return
+        }
+        
+        let question = questions[safe: index]
+        delegate?.didReceiveNextQuestion(question: question)
+    }
     
 }

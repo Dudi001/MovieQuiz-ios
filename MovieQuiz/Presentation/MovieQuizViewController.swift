@@ -80,7 +80,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPGreen")?.cgColor : UIColor(named: "YPGreen")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-                //добавляем слабую ссылку на self для удаления retail cycle
                 guard let  self = self else { return }
                 self.showNextQuestionOrResults()
             }
@@ -105,7 +104,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         if currentQuestionIndex == questionAmount - 1 {
             
             guard let statisticService = statisticService else { return }
-            //Сохраняем лучший результат
             statisticService.store(correct: correctAnswers, total: questionAmount)
             
             let totalAccurancyPercentage = String(format: "%.2f", statisticService.totalAccuracy * 100) + "%"

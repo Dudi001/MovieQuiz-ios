@@ -8,7 +8,7 @@
 import UIKit
 
 class AlertPresenter: AlertProtocol{
-    weak private var delegate: AlertProtocolDelegate?
+    private weak var delegate: AlertProtocolDelegate?
     
     
     init(delegate: AlertProtocolDelegate) {
@@ -23,8 +23,7 @@ class AlertPresenter: AlertProtocol{
         
         let action = UIAlertAction(
             title: model.buttonText,
-            style: .default) {[weak self] _ in
-                guard self != nil else { return }
+            style: .default) {_ in
                 model.completion()
             }
         

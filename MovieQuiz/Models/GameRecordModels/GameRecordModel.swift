@@ -15,19 +15,13 @@ struct GameRecord: Codable, Comparable {
     let date: Date
 
     static func < (lhs: GameRecord, rhs: GameRecord) -> Bool {
+        if lhs.total == 0 {
+            return true
+        }
+        
         let lhsAll = Double(lhs.correct) / Double(lhs.total)
         let rhsAll = Double(rhs.correct) / Double(rhs.total)
         
-        if lhs.total == 0 {
-            return true
-        } else if lhsAll > rhsAll {
-            return false
-        } else if lhsAll < rhsAll {
-            return true
-        } else  if lhsAll == rhsAll {
-            return true
-        } else {
-            return true
-        }
+        return lhsAll < rhsAll
     }
 }
