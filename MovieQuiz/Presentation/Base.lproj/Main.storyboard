@@ -121,6 +121,9 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="f5c-mD-nb7">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YPBlack"/>
@@ -128,10 +131,13 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZpC-dS-Nka" secondAttribute="trailing" constant="20" id="G8h-JH-yOa"/>
                             <constraint firstItem="ZpC-dS-Nka" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Hhi-EJ-CvX"/>
+                            <constraint firstItem="f5c-mD-nb7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bTs-L1-VIE"/>
+                            <constraint firstItem="f5c-mD-nb7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j6j-Ob-LsM"/>
                             <constraint firstItem="ZpC-dS-Nka" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="m3W-8m-vfJ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="f5c-mD-nb7" id="NaG-ug-50v"/>
                         <outlet property="counterLabel" destination="Ydv-TP-nsJ" id="rR8-rO-qWU"/>
                         <outlet property="imageView" destination="GxV-XM-lxK" id="Qb1-S4-OR2"/>
                         <outlet property="noButton" destination="vwW-CZ-KZO" id="1K5-q9-X6o"/>
