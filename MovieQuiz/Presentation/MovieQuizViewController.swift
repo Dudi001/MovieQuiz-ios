@@ -18,7 +18,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     @IBOutlet weak private var yesButton: UIButton!
     @IBOutlet weak private var noButton: UIButton!
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak private var activityIndicator: UIActivityIndicatorView!
     
     
     
@@ -36,7 +36,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     //MARK: - QuestionFactoryDelegate
     func didLoadDataFromServer() {
-        hideLoadingIndicator()
+        activityIndicator.stopAnimating()
         questionFactory?.requestNextQuestion()
     }
 
@@ -59,13 +59,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     // MARK: - Private functions
     private func showLoadingIndicator() {
-        activityIndicator.isHidden = false
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .gray
         activityIndicator.startAnimating()
-    }
-    
-    
-    private func hideLoadingIndicator() {
-        activityIndicator.isHidden = true
+        yesButton.isEnabled = false
+        noButton.isEnabled = false
     }
     
     
@@ -117,6 +115,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         }
     }
     
+
     //MARK: - Alert
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionAmount - 1 {
@@ -148,7 +147,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     
     private func showNetworkError(message: String) {
-        hideLoadingIndicator()
+        activityIndicator.stopAnimating()
+        
         
         let model = AlertModel(
             title: "Ошибка",
@@ -158,7 +158,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                 guard let self = self else { return }
                 self.currentQuestionIndex = 0
                 self.correctAnswers = 0
-                self.questionFactory?.requestNextQuestion()
+                
+                self.activityIndicator.startAnimating()
+                self.questionFactory?.loadData()
             })
             
             alertPresenter?.showAlert(model: model)
@@ -184,6 +186,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
         alertPresenter?.showAlert(model: alertModel)
     }
+    
     
     // MARK: - Actions
     @IBAction func yesButtonClicked(_ sender: UIButton) {

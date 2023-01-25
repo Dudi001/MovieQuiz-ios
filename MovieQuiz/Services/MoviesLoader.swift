@@ -17,7 +17,6 @@ struct MoviesLoader: MoviesLoading {
     // MARK: - NetworkClient
     private let networkClient = NetworkClient()
     
-    
     // MARK: - URL
     private var mostPopularMoviesUrl: URL {
             // Если мы не смогли преобразовать строку в URL, то приложение упадёт с ошибкой
@@ -34,6 +33,7 @@ struct MoviesLoader: MoviesLoading {
             case .success(let data):
                 do {
                     let mostPopularMovies = try JSONDecoder().decode(MostPopularMovies.self, from: data)
+                    print(mostPopularMovies)
                     handler(.success(mostPopularMovies))
                 }
                 catch {

@@ -141,14 +141,6 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		D93FB44A297DA773003C2275 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				D93FB44B297DA7A1003C2275 /* NetworkClient.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		D9A41992296AD9C700417AC4 /* AlertProtocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,26 +179,10 @@
 			path = QuizModels;
 			sourceTree = "<group>";
 		};
-		D9A41998296ADBA400417AC4 /* AlertModels */ = {
-			isa = PBXGroup;
-			children = (
-				D9A874F72961FF4E004EF375 /* AlertModel.swift */,
-			);
-			path = AlertModels;
-			sourceTree = "<group>";
-		};
-		D9A41999296ADBB900417AC4 /* GameRecordModels */ = {
-			isa = PBXGroup;
-			children = (
-				D927D3892968447800D9CFC8 /* GameRecordModel.swift */,
-			);
-			path = GameRecordModels;
-			sourceTree = "<group>";
-		};
 		D9D1D3B3295DFCE800A8F32B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D93FB44A297DA773003C2275 /* Network */,
+				D93FB44B297DA7A1003C2275 /* NetworkClient.swift */,
 				D9A41994296ADADB00417AC4 /* StatisticService */,
 				D9A41993296AD9E100417AC4 /* QuestionFactory */,
 				D9A41992296AD9C700417AC4 /* AlertProtocol */,
@@ -218,8 +194,8 @@
 		D9D1D3B6295E1D5800A8F32B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D9A41999296ADBB900417AC4 /* GameRecordModels */,
-				D9A41998296ADBA400417AC4 /* AlertModels */,
+				D9A874F72961FF4E004EF375 /* AlertModel.swift */,
+				D927D3892968447800D9CFC8 /* GameRecordModel.swift */,
 				D9A41997296ADB8500417AC4 /* QuizModels */,
 				D93FB44D297DABE1003C2275 /* MostPopularMovies.swift */,
 			);
