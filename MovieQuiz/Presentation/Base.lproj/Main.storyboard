@@ -140,6 +140,7 @@
                         <outlet property="activityIndicator" destination="f5c-mD-nb7" id="NaG-ug-50v"/>
                         <outlet property="counterLabel" destination="Ydv-TP-nsJ" id="rR8-rO-qWU"/>
                         <outlet property="imageView" destination="GxV-XM-lxK" id="Qb1-S4-OR2"/>
+                        <outlet property="mainView" destination="8bC-Xf-vdC" id="I9v-BQ-lEg"/>
                         <outlet property="noButton" destination="vwW-CZ-KZO" id="1K5-q9-X6o"/>
                         <outlet property="textLabel" destination="O3e-nR-6DG" id="WdO-9X-922"/>
                         <outlet property="yesButton" destination="I2E-cv-fo1" id="fqd-OJ-sp4"/>

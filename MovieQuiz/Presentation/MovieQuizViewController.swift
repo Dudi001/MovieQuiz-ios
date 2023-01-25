@@ -6,6 +6,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var counterLabel: UILabel!
     @IBOutlet weak private var textLabel: UILabel!
+    @IBOutlet var mainView: UIView!
     
     private var correctAnswers: Int = 0
     private var currentQuestionIndex: Int = 0
@@ -35,6 +36,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     //MARK: - QuestionFactoryDelegate
     func didLoadDataFromServer() {
+        mainView.alpha = 1
         activityIndicator.stopAnimating()
         questionFactory?.requestNextQuestion()
     }
@@ -58,6 +60,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     // MARK: - Private functions
     private func showLoadingIndicator() {
+        mainView.alpha = 0.5
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = .gray
         activityIndicator.startAnimating()
@@ -146,7 +149,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     private func showNetworkError(message: String) {
         activityIndicator.stopAnimating()
-        
         
         let model = AlertModel(
             title: "Ошибка",
