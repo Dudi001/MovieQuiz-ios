@@ -22,7 +22,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +40,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
 
     func didFailToLoadData(with error: Error) {
-        showNetworkError(message: error.localizedDescription) // возьмём в качестве сообщения описание ошибки
+        showNetworkError(message: error.localizedDescription)
     }
     
     func didReceiveNextQuestion(question: QuizQuestion?) {
@@ -108,7 +107,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             imageView.layer.cornerRadius = 20
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPRed")?.cgColor : UIColor(named: "YPRed")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
-                //добавляем слабую ссылку на self для удаления retail cycle
                 guard let  self = self else { return }
                 self.showNextQuestionOrResults()
             }
@@ -176,11 +174,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                 [weak self] in
                 guard let self = self else { return }
                 self.currentQuestionIndex = 0
-                
-                // скидываем счётчик правильных ответов
                 self.correctAnswers = 0
-                
-                // заново показываем первый вопрос
                 self.questionFactory?.requestNextQuestion()
             })
         
