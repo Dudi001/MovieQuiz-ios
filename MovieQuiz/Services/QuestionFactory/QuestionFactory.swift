@@ -7,20 +7,21 @@
 
 import Foundation
 
+private enum QuestionError: String, Error {
+    case errorLoadImage = "Ошибка при загрузке изображения"
+    case errorRespons = "Ошибка загрузки данных"
+}
+
 class QuestionFactory: QuestionFactoryProtocol {
     private let moviesLoader: MoviesLoading
     private weak var delegate: QuestionFactoryDelegate?
-    
-    
+    private var movies: [MostPopularMovie] = []
     
     
     init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate) {
         self.moviesLoader = moviesLoader
         self.delegate = delegate
     }
-    
-    private var movies: [MostPopularMovie] = []
-    
     
     
     func loadData() {
@@ -31,8 +32,8 @@ class QuestionFactory: QuestionFactoryProtocol {
                 case .success(let mostPopularMovies):
                     self.movies = mostPopularMovies.items
                     self.delegate?.didLoadDataFromServer()
-                case .failure(let error):
-                    self.delegate?.didFailToLoadData(with: error)
+                case .failure(_):
+                    self.delegate?.didFailToLoadData(with: QuestionError.errorRespons)
                 }
             }
         }
@@ -51,11 +52,14 @@ class QuestionFactory: QuestionFactoryProtocol {
             do {
                 imageData = try Data(contentsOf: movie.resizedImageURL)
             } catch {
-                print("Failed to load image")
+                DispatchQueue.main.async {
+                    self.delegate?.didFailToLoadData(with: QuestionError.errorLoadImage)
+                    return
+                }
             }
             
             let rating = Float(movie.rating) ?? 0
-            let checkRating = Int.random(in: 4...9)
+            let checkRating = Int.random(in: 7...9)
             let text = "Рейтинг этого фильма больше чем \(checkRating)?"
             let correctAnswer = rating > Float(checkRating)
             
@@ -69,5 +73,4 @@ class QuestionFactory: QuestionFactoryProtocol {
             }
         }
     }
-    
 }
