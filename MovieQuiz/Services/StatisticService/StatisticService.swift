@@ -58,6 +58,7 @@ final class StatisticServiceImplementation: StatisticService {
         }
     }
     
+    
     func store(correct count: Int, total amount: Int) {
         let newGame = GameRecord(correct: count, total: amount, date: Date())
         
