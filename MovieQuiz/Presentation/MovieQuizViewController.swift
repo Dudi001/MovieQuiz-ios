@@ -104,14 +104,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
                 self.showNextQuestionOrResults()
             }
         } else {
-            self.yesButton.isEnabled = false
-            self.noButton.isEnabled = false
-            
+            buttonToggle()
             imageView.layer.masksToBounds = true
             imageView.layer.borderWidth = 8
-            imageView.layer.cornerRadius = 20
             imageView.layer.borderColor = isCorrect ? UIColor(named: "YPRed")?.cgColor : UIColor(named: "YPRed")?.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
+                self?.buttonToggle()
                 guard let  self = self else { return }
                 self.showNextQuestionOrResults()
             }
@@ -119,7 +117,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     }
     
     private func buttonToggle() {
-        self.noButton.isEnabled.toggle() // отключаем кнопки чтобы нельзя было выбирать во время задержки
+        self.noButton.isEnabled.toggle()
         self.yesButton.isEnabled.toggle()
         self.yesButton.alpha = yesButton.isEnabled ? 1.0 : 0.5
         self.noButton.alpha = noButton.isEnabled ? 1.0 : 0.5
