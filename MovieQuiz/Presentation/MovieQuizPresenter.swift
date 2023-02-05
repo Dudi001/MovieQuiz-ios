@@ -8,8 +8,13 @@
 import UIKit
 
 final class MovieQuizPresenter {
+    private var task: DispatchWorkItem?
+    private var statisticService: StatisticService?
+    var questionFactory: QuestionFactoryProtocol? = nil
     private var currentQuestionIndex: Int = 0
+    var correctAnswers: Int = 0
     let questionAmount: Int = 10
+    
     weak var viewController: MovieQuizViewController?
     var currentQuestion: QuizQuestion?
     
@@ -32,7 +37,55 @@ final class MovieQuizPresenter {
             questionNumber: "\(currentQuestionIndex + 1)/\(questionAmount)")
     }
     
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        task?.cancel()
+        guard let question = question else {
+            return
+        }
+        
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        DispatchQueue.main.async { [weak self] in
+            self?.viewController?.activityIndicator.stopAnimating()
+            self?.viewController?.show(quiz: viewModel)
+        }
+    }
+    
+    //MARK: - Alert
+    func showNextQuestionOrResults() {
+        if isLastQuestion(){
+            
+            guard let statisticService = statisticService else { return }
+            statisticService.store(correct: correctAnswers, total: self.questionAmount)
+            let totalAccurancyPercentage = String(format: "%.2f", statisticService.totalAccuracy * 100) + "%"
+            let localTime = statisticService.bestGame.date.dateTimeString
+            let bestGameStart = "\(statisticService.bestGame.correct) / \(statisticService.bestGame.total)"
+            
+            let text = """
+            Ваш результат: \(correctAnswers) из \(self.questionAmount)
+            Колличество сыграных квизов: \(statisticService.gamesCount)
+            Рекорд: \(bestGameStart) (\(localTime))
+            Средняя точность: \(totalAccurancyPercentage)
+        """
+            let viewModel = QuizResultsViewModel(
+                title: "Этот раунд окончен!",
+                text: text,
+                buttonText: "Сыграть ещё раз")
+            viewController?.imageView.layer.borderWidth = 0
+            viewController?.show(quiz: viewModel)
+        } else {
+            task = DispatchWorkItem { self.viewController?.activityIndicator.startAnimating() }
+            // ставим таск на 0.3 секунды для показа спиннера загрузки, только в случае медленного соединия
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: (task!))
+            self.switchToNextQuestion()
+            questionFactory?.requestNextQuestion()
+            self.viewController?.imageView.layer.borderWidth = 0
+        }
+    }
+    
+    
     //MARK: - Button_func
+    
     func yesButtonClicked() {
         guard let currentQuestion = currentQuestion else {
             return
