@@ -38,6 +38,7 @@
 		D9D1D3B8295E1D8A00A8F32B /* QuizStepViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1D3B7295E1D8A00A8F32B /* QuizStepViewModel.swift */; };
 		D9D1D3BA295E1DA500A8F32B /* QuizResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1D3B9295E1DA500A8F32B /* QuizResultsViewModel.swift */; };
 		D9D1D3BC295E1DB400A8F32B /* QuizQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D1D3BB295E1DB400A8F32B /* QuizQuestion.swift */; };
+		D9D600B4298FC2A3004E8659 /* MovieQuizPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D600B3298FC2A3004E8659 /* MovieQuizPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		D9D1D3B7295E1D8A00A8F32B /* QuizStepViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStepViewModel.swift; sourceTree = "<group>"; };
 		D9D1D3B9295E1DA500A8F32B /* QuizResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsViewModel.swift; sourceTree = "<group>"; };
 		D9D1D3BB295E1DB400A8F32B /* QuizQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizQuestion.swift; sourceTree = "<group>"; };
+		D9D600B3298FC2A3004E8659 /* MovieQuizPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				AD1ABAB52831907B00B3E448 /* MovieQuizViewController.swift */,
 				D9A874F92961FFDB004EF375 /* AlertPresenter.swift */,
 				AD1ABAB72831907B00B3E448 /* Main.storyboard */,
+				D9D600B3298FC2A3004E8659 /* MovieQuizPresenter.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				D9D1D3B8295E1D8A00A8F32B /* QuizStepViewModel.swift in Sources */,
 				D9D1D3BC295E1DB400A8F32B /* QuizQuestion.swift in Sources */,
 				D93FB44C297DA7A1003C2275 /* NetworkClient.swift in Sources */,
+				D9D600B4298FC2A3004E8659 /* MovieQuizPresenter.swift in Sources */,
 				D9A8750029620F3B004EF375 /* AlertProtocol.swift in Sources */,
 				D9D1D3B5295DFD6700A8F32B /* QuestionFactory.swift in Sources */,
 				D9A875022962E3CE004EF375 /* AlertProtocolDelegate.swift in Sources */,
