@@ -9,8 +9,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     @IBOutlet private var mainView: UIView!
     
     private var correctAnswers: Int = 0
-    private var currentQuestionIndex: Int = 0
-    private let questionAmount: Int = 10
     private var questionFactory: QuestionFactoryProtocol? = nil
     private var currentQuestion: QuizQuestion?
     private var alertPresenter: AlertPresenter?
@@ -121,13 +119,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         if presenter.isLastQuestion(){
             
             guard let statisticService = statisticService else { return }
-            statisticService.store(correct: correctAnswers, total: questionAmount)
+            statisticService.store(correct: correctAnswers, total: presenter.questionAmount)
             let totalAccurancyPercentage = String(format: "%.2f", statisticService.totalAccuracy * 100) + "%"
             let localTime = statisticService.bestGame.date.dateTimeString
             let bestGameStart = "\(statisticService.bestGame.correct) / \(statisticService.bestGame.total)"
             
             let text = """
-            Ваш результат: \(correctAnswers) из \(questionAmount)
+            Ваш результат: \(correctAnswers) из \(presenter.questionAmount)
             Колличество сыграных квизов: \(statisticService.gamesCount)
             Рекорд: \(bestGameStart) (\(localTime))
             Средняя точность: \(totalAccurancyPercentage)
