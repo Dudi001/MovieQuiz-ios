@@ -18,8 +18,10 @@ final class MovieQuizPresenter {
     weak var viewController: MovieQuizViewController?
     var currentQuestion: QuizQuestion?
     
+    
+    
     func isLastQuestion() -> Bool {
-        currentQuestionIndex == questionAmount - 1 
+        currentQuestionIndex == questionAmount - 1
     }
     
     func switchToNextQuestion() {
@@ -53,10 +55,11 @@ final class MovieQuizPresenter {
     
     //MARK: - Alert
     func showNextQuestionOrResults() {
-        if isLastQuestion(){
-            
+        statisticService = StatisticServiceImplementation()
+        
+        if self.isLastQuestion() {
             guard let statisticService = statisticService else { return }
-            statisticService.store(correct: correctAnswers, total: self.questionAmount)
+            self.statisticService?.store(correct: correctAnswers, total: self.questionAmount)
             let totalAccurancyPercentage = String(format: "%.2f", statisticService.totalAccuracy * 100) + "%"
             let localTime = statisticService.bestGame.date.dateTimeString
             let bestGameStart = "\(statisticService.bestGame.correct) / \(statisticService.bestGame.total)"
@@ -87,18 +90,18 @@ final class MovieQuizPresenter {
     //MARK: - Button_func
     
     func yesButtonClicked() {
-        guard let currentQuestion = currentQuestion else {
-            return
-        }
-        let givenAnswer = true
-        viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        didAnswer(isYes: true)
     }
     
     func noButtonClicked() {
+        didAnswer(isYes: false)
+    }
+    
+    private func didAnswer(isYes: Bool) {
         guard let currentQuestion = currentQuestion else {
             return
         }
-        let givenAnswer = false
+        let givenAnswer = isYes
         viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
 }

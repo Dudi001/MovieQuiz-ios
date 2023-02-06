@@ -14,7 +14,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private var correctAnswers: Int = 0
     private var questionFactory: QuestionFactoryProtocol? = nil
     private var alertPresenter: AlertPresenter?
-    private var statisticService: StatisticService?
     private let presenter = MovieQuizPresenter()
     
     
@@ -24,7 +23,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
         
         mainView.alpha = 0.5
         imageView.layer.cornerRadius = 20
-        statisticService = StatisticServiceImplementation()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         showLoadingIndicator()
         questionFactory?.loadData()
