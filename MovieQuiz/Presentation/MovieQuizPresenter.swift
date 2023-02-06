@@ -79,6 +79,28 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         }
     }
     
+    func showAnswerResult(isCorrect: Bool) {
+        if isCorrect {
+            self.isCorrect()
+            
+            viewController?.buttonToggle()
+            viewController?.hideAnimationBorder(isCorrect: isCorrect)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
+                self?.viewController?.buttonToggle()
+                guard let  self = self else { return }
+                self.showNextQuestionOrResults()
+            }
+        } else {
+            viewController?.buttonToggle()
+            viewController?.hideAnimationBorder(isCorrect: isCorrect)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
+                self?.viewController?.buttonToggle()
+                guard let  self = self else { return }
+                self.showNextQuestionOrResults()
+            }
+        }
+    }
+    
     //MARK: - Alert
     func showNextQuestionOrResults() {
         statisticService = StatisticServiceImplementation()
@@ -128,7 +150,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             return
         }
         let givenAnswer = isYes
-        viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        self.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
     
 
