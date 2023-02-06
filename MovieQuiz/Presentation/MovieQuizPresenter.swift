@@ -4,19 +4,41 @@
 //
 //  Created by Мурад Манапов on 05.02.2023.
 //
-
 import UIKit
 
-final class MovieQuizPresenter {
+final class MovieQuizPresenter: QuestionFactoryDelegate {
+    
     private var task: DispatchWorkItem?
     private var statisticService: StatisticService?
-    var questionFactory: QuestionFactoryProtocol? = nil
+    private var questionFactory: QuestionFactoryProtocol?
+    private weak var viewController: MovieQuizViewController?
     private var currentQuestionIndex: Int = 0
     var correctAnswers: Int = 0
     let questionAmount: Int = 10
-    
-    weak var viewController: MovieQuizViewController?
     var currentQuestion: QuizQuestion?
+    
+    init(viewController: MovieQuizViewController) {
+        self.viewController = viewController
+        
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
+        questionFactory?.loadData()
+        viewController.showLoadingIndicator()
+    }
+    
+    // MARK: - QuestionFactoryDelegate
+    
+    func didLoadDataFromServer() {
+        viewController?.hideLoadingIndicator()
+        viewController?.mainView.alpha = 1
+        viewController?.activityIndicator.stopAnimating()
+        questionFactory?.requestNextQuestion()
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        let message = error.localizedDescription
+        viewController?.activityIndicator.stopAnimating()
+        viewController?.showNetworkError(message: message)
+    }
     
     func isCorrect() {
         correctAnswers += 1
@@ -33,6 +55,7 @@ final class MovieQuizPresenter {
     func restartGame() {
         currentQuestionIndex = 0
         correctAnswers = 0
+        self.questionFactory?.requestNextQuestion()
     }
     
     func convert(model: QuizQuestion) -> QuizStepViewModel {
