@@ -11,7 +11,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     @IBOutlet weak private var noButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    private var correctAnswers: Int = 0
+    
     private var questionFactory: QuestionFactoryProtocol? = nil
     private var alertPresenter: AlertPresenter?
     private let presenter = MovieQuizPresenter()
@@ -70,7 +70,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
-            correctAnswers += 1
+            presenter.isCorrect()
             
             buttonToggle()
             imageView.layer.masksToBounds = true
@@ -79,7 +79,6 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
                 self?.buttonToggle()
                 guard let  self = self else { return }
-                self.presenter.correctAnswers = self.correctAnswers
                 self.presenter.questionFactory = self.questionFactory
                 self.presenter.showNextQuestionOrResults()
             }
@@ -116,9 +115,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             buttonText: "Попробовать еще раз",
             completion: { [weak self] in
                 guard let self = self else { return }
-                self.presenter.resetQuestionIndex()
-                self.correctAnswers = 0
-                
+                self.presenter.restartGame()
                 self.activityIndicator.startAnimating()
                 self.questionFactory?.loadData()
             })
@@ -135,8 +132,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
             completion: {
                 [weak self] in
                 guard let self = self else { return }
-                self.presenter.resetQuestionIndex()
-                self.correctAnswers = 0
+                self.presenter.restartGame()
                 self.questionFactory?.requestNextQuestion()
             })
         

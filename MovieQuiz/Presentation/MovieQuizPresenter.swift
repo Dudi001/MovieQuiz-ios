@@ -18,7 +18,9 @@ final class MovieQuizPresenter {
     weak var viewController: MovieQuizViewController?
     var currentQuestion: QuizQuestion?
     
-    
+    func isCorrect() {
+        correctAnswers += 1
+    }
     
     func isLastQuestion() -> Bool {
         currentQuestionIndex == questionAmount - 1
@@ -28,8 +30,9 @@ final class MovieQuizPresenter {
         currentQuestionIndex += 1
     }
     
-    func resetQuestionIndex() {
+    func restartGame() {
         currentQuestionIndex = 0
+        correctAnswers = 0
     }
     
     func convert(model: QuizQuestion) -> QuizStepViewModel {
@@ -104,4 +107,6 @@ final class MovieQuizPresenter {
         let givenAnswer = isYes
         viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
+    
+
 }
