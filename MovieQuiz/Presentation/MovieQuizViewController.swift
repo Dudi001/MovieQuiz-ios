@@ -38,7 +38,7 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate {
     func hideAnimationBorder(isCorrect: Bool) {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
-        imageView.layer.borderColor = isCorrect ? UIColor(named: "YPRed")?.cgColor : UIColor(named: "YPRed")?.cgColor
+        imageView.layer.borderColor = isCorrect ? UIColor(named: "YPGreen")?.cgColor : UIColor(named: "YPRed")?.cgColor
     }
     
     func showLoadingIndicator() {

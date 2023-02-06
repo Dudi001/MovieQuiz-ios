@@ -27,28 +27,28 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     
     // MARK: - QuestionFactoryDelegate
     
-    func didLoadDataFromServer() {
+    internal func didLoadDataFromServer() {
         viewController?.hideLoadingIndicator()
         viewController?.mainView.alpha = 1
         viewController?.activityIndicator.stopAnimating()
         questionFactory?.requestNextQuestion()
     }
     
-    func didFailToLoadData(with error: Error) {
+    internal func didFailToLoadData(with error: Error) {
         let message = error.localizedDescription
         viewController?.activityIndicator.stopAnimating()
         viewController?.showNetworkError(message: message)
     }
     
-    func isCorrect() {
+    private func isCorrect() {
         correctAnswers += 1
     }
     
-    func isLastQuestion() -> Bool {
+    private func isLastQuestion() -> Bool {
         currentQuestionIndex == questionAmount - 1
     }
     
-    func switchToNextQuestion() {
+    private func switchToNextQuestion() {
         currentQuestionIndex += 1
     }
     
@@ -58,14 +58,14 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         self.questionFactory?.requestNextQuestion()
     }
     
-    func convert(model: QuizQuestion) -> QuizStepViewModel {
+    private func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(
             image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionAmount)")
     }
     
-    func didReceiveNextQuestion(question: QuizQuestion?) {
+    internal func didReceiveNextQuestion(question: QuizQuestion?) {
         task?.cancel()
         guard let question = question else {
             return
@@ -79,7 +79,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         }
     }
     
-    func showAnswerResult(isCorrect: Bool) {
+    private func showAnswerResult(isCorrect: Bool) {
         if isCorrect {
             self.isCorrect()
             
