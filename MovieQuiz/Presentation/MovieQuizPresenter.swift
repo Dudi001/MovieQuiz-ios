@@ -7,30 +7,18 @@
 import UIKit
 
 
-protocol MovieQuizViewCintrollerProtocol: AnyObject {
-    func show(quiz step:QuizStepViewModel)
-    func show(quiz result: QuizResultsViewModel)
-    
-    func highlightImageBorder(isCorrectAnswer: Bool)
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
-
-    func showNetworkError(message: String)
-}
-
-
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     
     private var task: DispatchWorkItem?
     private var statisticService: StatisticService?
     private var questionFactory: QuestionFactoryProtocol?
-    private weak var viewController: MovieQuizViewController?
+    private weak var viewController: MovieQuizViewCintrollerProtocol?
     private var currentQuestionIndex: Int = 0
     var correctAnswers: Int = 0
     let questionAmount: Int = 10
     var currentQuestion: QuizQuestion?
     
-    init(viewController: MovieQuizViewController) {
+    init(viewController: MovieQuizViewCintrollerProtocol) {
         self.viewController = viewController
         
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
@@ -71,7 +59,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         self.questionFactory?.requestNextQuestion()
     }
     
-    private func convert(model: QuizQuestion) -> QuizStepViewModel {
+    func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(
             image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
@@ -135,7 +123,6 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
                 title: "Этот раунд окончен!",
                 text: text,
                 buttonText: "Сыграть ещё раз")
-            viewController?.imageView.layer.borderWidth = 0
             viewController?.show(quiz: viewModel)
         } else {
             task = DispatchWorkItem { self.viewController?.activityIndicator.startAnimating() }
@@ -143,7 +130,6 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: (task!))
             self.switchToNextQuestion()
             questionFactory?.requestNextQuestion()
-            self.viewController?.imageView.layer.borderWidth = 0
         }
     }
     

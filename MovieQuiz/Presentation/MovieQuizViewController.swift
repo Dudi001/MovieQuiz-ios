@@ -1,5 +1,19 @@
 import UIKit
 
+
+protocol MovieQuizViewCintrollerProtocol: AnyObject {
+    var activityIndicator: UIActivityIndicatorView! { get set }
+    var mainView: UIView! { get set }
+    func show(quiz step:QuizStepViewModel)
+    func show(quiz result: QuizResultsViewModel)
+    func buttonToggle()
+    func highlightImageBorder(isCorrectAnswer: Bool)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
+    func showNetworkError(message: String)
+}
+
+
 final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, MovieQuizViewCintrollerProtocol {
     
     
@@ -39,6 +53,7 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrectAnswer ? UIColor(named: "YPGreen")?.cgColor : UIColor(named: "YPRed")?.cgColor
+        
     }
     
     func showLoadingIndicator() {
@@ -50,6 +65,7 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
     }
     
     func show(quiz step: QuizStepViewModel) {
+        imageView.layer.borderColor = UIColor.clear.cgColor
         counterLabel.text = step.questionNumber
         textLabel.text = step.question
         imageView.image = step.image
