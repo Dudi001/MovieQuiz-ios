@@ -6,6 +6,19 @@
 //
 import UIKit
 
+
+protocol MovieQuizViewCintrollerProtocol: AnyObject {
+    func show(quiz step:QuizStepViewModel)
+    func show(quiz result: QuizResultsViewModel)
+    
+    func highlightImageBorder(isCorrectAnswer: Bool)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
+
+    func showNetworkError(message: String)
+}
+
+
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     
     private var task: DispatchWorkItem?
@@ -84,7 +97,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             self.isCorrect()
             
             viewController?.buttonToggle()
-            viewController?.hideAnimationBorder(isCorrect: isCorrect)
+            viewController?.highlightImageBorder(isCorrectAnswer: isCorrect)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
                 self?.viewController?.buttonToggle()
                 guard let  self = self else { return }
@@ -92,7 +105,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             }
         } else {
             viewController?.buttonToggle()
-            viewController?.hideAnimationBorder(isCorrect: isCorrect)
+            viewController?.highlightImageBorder(isCorrectAnswer: isCorrect)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {[weak self] in
                 self?.viewController?.buttonToggle()
                 guard let  self = self else { return }
@@ -102,7 +115,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     }
     
     //MARK: - Alert
-    func showNextQuestionOrResults() {
+    private func showNextQuestionOrResults() {
         statisticService = StatisticServiceImplementation()
         
         if self.isLastQuestion() {
