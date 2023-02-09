@@ -16,7 +16,6 @@ protocol MovieQuizViewCintrollerProtocol: AnyObject {
 
 final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, MovieQuizViewCintrollerProtocol {
     
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak private var counterLabel: UILabel!
     @IBOutlet weak private var textLabel: UILabel!
@@ -24,7 +23,6 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
     @IBOutlet weak private var yesButton: UIButton!
     @IBOutlet weak private var noButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     
     private var alertPresenter: AlertPresenter?
     private var presenter: MovieQuizPresenter!
@@ -42,18 +40,14 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
 
     }
     
-    
-    // MARK: - Private functions
     func hideLoadingIndicator() {
         activityIndicator.isHidden = true
-        
     }
     
     func highlightImageBorder(isCorrectAnswer: Bool) {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrectAnswer ? UIColor(named: "YPGreen")?.cgColor : UIColor(named: "YPRed")?.cgColor
-        
     }
     
     func showLoadingIndicator() {
@@ -82,7 +76,7 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
     
     
     //MARK: - Alert
-    
+
     func showNetworkError(message: String) {
         activityIndicator.stopAnimating()
         
@@ -95,7 +89,6 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
                 self.presenter.restartGame()
                 self.activityIndicator.startAnimating()
             })
-        
         alertPresenter?.showAlert(model: model)
     }
     
@@ -109,12 +102,12 @@ final class MovieQuizViewController: UIViewController, AlertProtocolDelegate, Mo
                 guard let self = self else { return }
                 self.presenter.restartGame()
             })
-        
         alertPresenter?.showAlert(model: alertModel)
     }
     
     
     // MARK: - Actions
+
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         presenter.yesButtonClicked()
     }

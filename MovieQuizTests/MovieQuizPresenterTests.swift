@@ -15,33 +15,19 @@ final class MovieQuizControllerProtocolMock: MovieQuizViewCintrollerProtocol {
     
     var mainView: UIView!
     
-    func buttonToggle() {
-        
-    }
+    func buttonToggle() { }
     
-    func show(quiz step: MovieQuiz.QuizStepViewModel) {
-        
-    }
+    func show(quiz step: MovieQuiz.QuizStepViewModel) { }
 
-    func show(quiz result: MovieQuiz.QuizResultsViewModel) {
-        
-    }
+    func show(quiz result: MovieQuiz.QuizResultsViewModel) { }
 
-    func highlightImageBorder(isCorrectAnswer: Bool) {
-        
-    }
+    func highlightImageBorder(isCorrectAnswer: Bool) { }
 
-    func showLoadingIndicator() {
-        
-    }
+    func showLoadingIndicator() { }
 
-    func hideLoadingIndicator() {
-        
-    }
+    func hideLoadingIndicator() { }
 
-    func showNetworkError(message: String) {
-        
-    }
+    func showNetworkError(message: String) { }
 
 }
 
@@ -59,4 +45,3 @@ final class MovieQuizPresenterTests: XCTestCase {
     XCTAssertEqual(viewModel.questionNumber, "1/10")
     }
 }
-

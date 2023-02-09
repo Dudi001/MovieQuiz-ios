@@ -103,6 +103,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     }
     
     //MARK: - Alert
+    
     private func showNextQuestionOrResults() {
         statisticService = StatisticServiceImplementation()
         
@@ -126,7 +127,6 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             viewController?.show(quiz: viewModel)
         } else {
             task = DispatchWorkItem { self.viewController?.activityIndicator.startAnimating() }
-            // ставим таск на 0.3 секунды для показа спиннера загрузки, только в случае медленного соединия
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3, execute: (task!))
             self.switchToNextQuestion()
             questionFactory?.requestNextQuestion()
@@ -151,6 +151,4 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         let givenAnswer = isYes
         self.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
-    
-
 }
