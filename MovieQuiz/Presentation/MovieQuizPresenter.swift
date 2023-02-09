@@ -28,14 +28,14 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     
     // MARK: - QuestionFactoryDelegate
     
-    internal func didLoadDataFromServer() {
+    func didLoadDataFromServer() {
         viewController?.hideLoadingIndicator()
         viewController?.mainView.alpha = 1
         viewController?.activityIndicator.stopAnimating()
         questionFactory?.requestNextQuestion()
     }
     
-    internal func didFailToLoadData(with error: Error) {
+    func didFailToLoadData(with error: Error) {
         let message = error.localizedDescription
         viewController?.activityIndicator.stopAnimating()
         viewController?.showNetworkError(message: message)
@@ -45,7 +45,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         correctAnswers += 1
     }
     
-    private func isLastQuestion() -> Bool {
+    var isLastQuestion: Bool {
         currentQuestionIndex == questionAmount - 1
     }
     
@@ -66,7 +66,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             questionNumber: "\(currentQuestionIndex + 1)/\(questionAmount)")
     }
     
-    internal func didReceiveNextQuestion(question: QuizQuestion?) {
+    func didReceiveNextQuestion(question: QuizQuestion?) {
         task?.cancel()
         guard let question = question else {
             return
@@ -107,7 +107,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private func showNextQuestionOrResults() {
         statisticService = StatisticServiceImplementation()
         
-        if self.isLastQuestion() {
+        if self.isLastQuestion {
             guard let statisticService = statisticService else { return }
             self.statisticService?.store(correct: correctAnswers, total: self.questionAmount)
             let totalAccurancyPercentage = String(format: "%.2f", statisticService.totalAccuracy * 100) + "%"

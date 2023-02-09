@@ -64,6 +64,7 @@ final class MovieQuizUITests: XCTestCase {
     
     
     func testAlert() throws {
+        sleep(2)
         let alertTitle = app.alerts["Game result"]
         
         for _ in (1...10) {
