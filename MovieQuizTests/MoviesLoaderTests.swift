@@ -11,12 +11,11 @@ import XCTest
 
 struct StubNetworkClient: NetworkRouting {
     
-    enum TestError: Error { // тестовая ошибка
+    enum TestError: Error {
         case test
     }
     
-    let emulateError: Bool // этот параметр нужен, чтобы заглушка эмулировала либо ошибку сети, либо успешный ответ
-    
+    let emulateError: Bool
     func fetch(url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
         if emulateError {
             handler(.failure(TestError.test))
@@ -63,47 +62,31 @@ struct StubNetworkClient: NetworkRouting {
 
 class MoviesLoaderTests: XCTestCase {
     func testSuccessLoading() throws {
-        //Given
-        let subNetworkClient = StubNetworkClient(emulateError: false)// говорим, что не хотим эмулировать ошибку
+        let subNetworkClient = StubNetworkClient(emulateError: false)
         let loader = MoviesLoader(networkClient: subNetworkClient)
         
-        //When
-        //Создаем ожидание
         let expectation = expectation(description: "Loading expectation")
         
-        
         loader.loadMovies { result in
-            //Then
             switch result {
             case .success(let movies):
-                // сравниваем данные с тем, что мы предполагали
                 XCTAssertEqual(movies.items.count, 2)
                 expectation.fulfill()
             case .failure(_):
-                // мы не ожидаем, что пришла ошибка; если она появится, надо будет провалить тест
-                XCTFail("Unexpected failure") // эта функция проваливает тест
+                XCTFail("Unexpected failure")
             }
-            
         }
-        
         waitForExpectations(timeout: 1)
         
     }
     
     func testFailureLoading() throws {
-        //Given
         let subNetworlClient = StubNetworkClient(emulateError: true)
         let loader = MoviesLoader(networkClient: subNetworlClient)
         
-        
-        
-        //When
         let expectation = expectation(description: "Loading expectation")
         
-        
-        
         loader.loadMovies { result in
-        
             switch result {
             case .failure(let error):
                 XCTAssertNotNil(error)
@@ -113,7 +96,6 @@ class MoviesLoaderTests: XCTestCase {
                 XCTFail("Data response success")
             }
         }
-        
         waitForExpectations(timeout: 1)
     }
 }
